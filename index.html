@@ -3,13 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<select name="dick" id="cock">
-    <option>Dick</option>
-    <option>Cock</option>
-    <option>Penis</option>
-</select>
+<main>
+    <section class="gray-background">
+        <h1>Типы роторов и рефлектора:</h1>
+        <div class="wrapper">
+            <div id="reflector-type" class="value-wrapper">
+                <div class="increment-button">▲</div>
+                <div class="value">B</div>
+                <div class="decrement-button">▼</div>
+                <div>рефл.</div>
+            </div>
+            <div id="rotor-type-left" class="value-wrapper">
+                <div class="increment-button">▲</div>
+                <div class="value">I</div>
+                <div class="decrement-button">▼</div>
+                <div>лев.</div>
+            </div>
+
+            <div id="rotor-type-middle" class="value-wrapper">
+                <div class="increment-button">▲</div>
+                <div class="value">I</div>
+                <div class="decrement-button">▼</div>
+                <div>сред.</div>
+            </div>
+
+            <div id="rotor-type-right" class="value-wrapper">
+                <div class="increment-button">▲</div>
+                <div class="value">I</div>
+                <div class="decrement-button">▼</div>
+                <div>прав.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gray-background">
+        <h1>Начальные позиции роторов:</h1>
+        <div class="wrapper">
+            <div id="rotor-pos-left" class="value-wrapper">
+                <div class="increment-button">▲</div>
+                <div class="value">A</div>
+                <div class="decrement-button">▼</div>
+                <div>лев.</div>
+            </div>
+
+            <div id="rotor-pos-middle" class="value-wrapper">
+                <div class="increment-button">▲</div>
+                <div class="value">A</div>
+                <div class="decrement-button">▼</div>
+                <div>сред.</div>
+            </div>
+
+            <div id="rotor-pos-right" class="value-wrapper">
+                <div class="increment-button">▲</div>
+                <div class="value">A</div>
+                <div class="decrement-button">▼</div>
+                <div>прав.</div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h1>Ввод значения:</h1>
+        <input id="input" type="text">
+        <div id="run-button" class="button">Запустить энигму</div>
+    </section>
+
+
+    <section>
+        <h1>Результат:</h1>
+        <div id="result"></div>
+    </section>
+</main>
+
+
 <script type="module" src="main.js"></script>
 </body>
 </html>

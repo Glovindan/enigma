@@ -11,7 +11,7 @@ class Enigma {
     middleRotorPosition;
     rightRotorPosition;
 
-    constructor(leftRotorType, middleRotorType, rightRotorType, reflectorType, leftRotorPosition = 0, middleRotorPosition = 0, rightRotorPosition = 0) {
+    constructor(leftRotorType = 0, middleRotorType = 0, rightRotorType = 0, reflectorType = 0, leftRotorPosition = 0, middleRotorPosition = 0, rightRotorPosition = 0) {
         this.leftRotorType = leftRotorType
         this.middleRotorType = middleRotorType
         this.rightRotorType = rightRotorType
@@ -22,6 +22,35 @@ class Enigma {
         this.middleRotorPosition = middleRotorPosition
         this.rightRotorPosition = rightRotorPosition
     }
+    // setReflectorType(type) {
+    //     this.reflectorType = type % 2;
+    // }
+    //
+    // setRotorType(rotorNumber, type) {
+    //     const typeMod = type % 8;
+    //     switch(rotorNumber) {
+    //         case 0: this.leftRotorType = typeMod
+    //             return true
+    //         case 1: this.middleRotorType = typeMod
+    //             return true
+    //         case 2: this.rightRotorType = typeMod
+    //             return true
+    //         default: return false
+    //     }
+    // }
+    //
+    // setRotorPosition(rotorNumber, position) {
+    //     const positionMod = position % 26;
+    //     switch(rotorNumber) {
+    //         case 0: this.leftRotorPosition = positionMod
+    //             return true
+    //         case 1: this.middleRotorPosition = positionMod
+    //             return true
+    //         case 2: this.rightRotorPosition = positionMod
+    //             return true
+    //         default: return false
+    //     }
+    // }
 
     rotateRotor(position) {
         position = (position + 1) % 26;
@@ -57,12 +86,11 @@ class Enigma {
         //Преобразование левого ротора
         letter = this.changeLetter(letter, this.leftRotorType, this.leftRotorPosition, this.middleRotorPosition)
 
-        //Вывод
         return letter
     }
 
     goReflector(letter) {
-        letter = REFLECTORS[this.reflectorType][(letter - this.leftRotorPosition) % 26]
+        letter = REFLECTORS[this.reflectorType][(letter + 26 - this.leftRotorPosition) % 26]
         return letter
     }
     goBackward(letter) {
@@ -72,25 +100,24 @@ class Enigma {
         letter = this.changeLetterBackward(letter, this.middleRotorType, this.leftRotorPosition, this.middleRotorPosition);
         //Преобразования правого ротора
         letter = this.changeLetterBackward(letter, this.rightRotorType, this.middleRotorPosition, this.rightRotorPosition);
-        //Я запутался но это должно быть так
+        //Вывод
         letter = (letter + 26 - this.rightRotorPosition) % 26;
         return letter
     }
 
-    runMachine(letterStr) {
-        // let answer = "";
-        // for (let i = 0; i < stroke.length; i++) {
-        //     let letter = ALPHABET.indexOf(stroke[i].toUpperCase());
-        //     letter = this.goForward(letter)
-        //     letter = this.goReflector(letter)
-        //     letter = this. goBackward(letter)
-        // }
-
-        let letter = ALPHABET.indexOf(letterStr);
-        letter = this.goForward(letter)
-        letter = this.goReflector(letter)
-        letter = this.goBackward(letter)
-        let answer = ALPHABET[letter];
+    runMachine(stroke) {
+        let answer = "";
+        for (let i = 0; i < stroke.length; i++) {
+            if(stroke[i] === " ") answer += " "
+            else {
+                let letter = ALPHABET.indexOf(stroke[i].toUpperCase());
+                if (letter === -1) return null;
+                letter = this.goForward(letter)
+                letter = this.goReflector(letter)
+                letter = this.goBackward(letter)
+                answer += ALPHABET[letter]
+            }
+        }
         return answer
     }
 }
